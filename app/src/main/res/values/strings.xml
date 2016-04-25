@@ -5,4 +5,11 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+    <string name="title_activity_candidates">Candidates</string>
+    <string name="title_activity_issues">Issues</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="title_activity_vote">Vote</string>
+    <string name="title_activity_candidate_detail">Candidate Detail</string>
+    <string name="title_activity_issue_detail">Issue Detail</string>
+    <string name="title_activity_base">BaseActivity</string>
 </resources>

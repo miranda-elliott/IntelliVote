@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/candidates"
+            android:title="Candidates" />
+        <item
+            android:id="@+id/issues"
+            android:title="Issues" />
+        <item
+            android:id="@+id/vote"
+            android:title="Vote" />
+        <item
+            android:id="@+id/settings"
+            android:title="Settings" />
+    </group>
+
+</menu>

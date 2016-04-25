@@ -12,23 +12,28 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:src="@android:drawable/sym_def_app_icon" />
+        android:id="@+id/header_image"
+        android:layout_width="105dp"
+        android:layout_height="105dp"
+        android:padding="5dp"
+        android:background="@drawable/circle"
+        android:src="@drawable/img_profile" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="Android Studio"
+        android:paddingTop="10dp"
+        android:text="Abigail Brickhouse"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <TextView
-        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="android.studio@android.com" />
+        android:text="600 Ukrop Way" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Williamsburg, VA 23185" />
 
 </LinearLayout>
