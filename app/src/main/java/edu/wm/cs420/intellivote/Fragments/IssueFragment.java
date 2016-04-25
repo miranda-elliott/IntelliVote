@@ -3,6 +3,7 @@ package edu.wm.cs420.intellivote.Fragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,9 +48,20 @@ public class IssueFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.content_issue_detail, container, false);
-
         // TODO: create layouts for each tab
+
+        View rootView = inflater.inflate(R.layout.fragment_issue_history, container, false);
+
+        switch (tab) {
+            case 0:
+                rootView = inflater.inflate(R.layout.fragment_issue_history, container, false);
+
+            case 1:
+                rootView = inflater.inflate(R.layout.fragment_issue_candidates, container, false);
+
+            case 2:
+                rootView = inflater.inflate(R.layout.fragment_issue_news, container, false);
+        }
 
         return rootView;
     }

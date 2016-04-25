@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import edu.wm.cs420.intellivote.Adapters.CandidateFragmentAdapter;
 import edu.wm.cs420.intellivote.Adapters.CandidateListAdapter;
 import edu.wm.cs420.intellivote.Models.Candidate;
 import edu.wm.cs420.intellivote.R;
@@ -55,9 +57,20 @@ public class CandidateFragment extends Fragment{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.content_candidate_detail, container, false);
-
         // TODO: create layouts for each tab
+
+        View rootView = inflater.inflate(R.layout.fragment_candidate_bio, container, false);
+
+        switch (tab) {
+            case 0:
+                rootView = inflater.inflate(R.layout.fragment_candidate_bio, container, false);
+
+            case 1:
+                rootView = inflater.inflate(R.layout.fragment_candidate_issues, container, false);
+
+            case 2:
+                rootView = inflater.inflate(R.layout.fragment_candidate_news, container, false);
+        }
 
         return rootView;
     }

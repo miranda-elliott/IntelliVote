@@ -9,9 +9,9 @@ import edu.wm.cs420.intellivote.Fragments.CandidateListFragment;
 import edu.wm.cs420.intellivote.Models.Candidate;
 
 public class CandidateFragmentAdapter extends FragmentStatePagerAdapter {
-    final int TAB_BIO = 0;
-    final int TAB_ISSUES = 1;
-    final int TAB_NEWS = 2;
+    public final int TAB_BIO = 0;
+    public final int TAB_ISSUES = 1;
+    public final int TAB_NEWS = 2;
 
     static Candidate candidate = null;
 
