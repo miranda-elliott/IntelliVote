@@ -9,6 +9,7 @@ public class CandidateIssueActivity extends BaseActivity {
 
     String candidateName;
     String issueName;
+    String bodyText;
     int currentActivity;
 
     TextView textView;
@@ -20,6 +21,7 @@ public class CandidateIssueActivity extends BaseActivity {
         // get extra
         candidateName = getIntent().getStringExtra(CandidateDetailActivity.EXTRA_CANDIDATE_NAME);
         issueName = getIntent().getStringExtra(CandidateDetailActivity.EXTRA_ISSUE_NAME);
+        bodyText = getIntent().getStringExtra(CandidateDetailActivity.EXTRA_TEXT);
         currentActivity = getIntent().getIntExtra(CandidateDetailActivity.EXTRA_ACTIVITY, 0);
 
         // set shared variables
@@ -32,11 +34,7 @@ public class CandidateIssueActivity extends BaseActivity {
 
         // fill page
         textView = (TextView) findViewById(R.id.text_body);
-        textView.setText(getCandidatePosition());
-    }
-
-    String getCandidatePosition() {
-        return "Sample";
+        textView.setText(bodyText);
     }
 
 }

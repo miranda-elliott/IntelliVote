@@ -3,7 +3,6 @@ package edu.wm.cs420.intellivote.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,6 +26,7 @@ public class CandidateDetailActivity extends BaseActivity
     // Intent extras to send to candidate issue activity
     public static final String EXTRA_CANDIDATE_NAME = "candidate_name";
     public static final String EXTRA_ISSUE_NAME = "issue_name";
+    public static final String EXTRA_TEXT = "body_text";
     public static final String EXTRA_ACTIVITY = "parent_activity";
 
     CandidateDetailFragmentAdapter mCandidateDetailFragmentAdapter;
@@ -95,6 +95,25 @@ public class CandidateDetailActivity extends BaseActivity
         intent.putExtra(EXTRA_CANDIDATE_NAME, candidate.name);
         intent.putExtra(EXTRA_ISSUE_NAME, issue.name);
         intent.putExtra(EXTRA_ACTIVITY, R.id.candidates);
+
+        switch(issue.name) {
+            case "Abortion":
+                intent.putExtra(EXTRA_TEXT, candidate.abortionFull);
+                break;
+            case "Gun Control":
+                intent.putExtra(EXTRA_TEXT, candidate.gunFull);
+                break;
+            case "Marriage Equality":
+                intent.putExtra(EXTRA_TEXT, candidate.marriageFull);
+                break;
+            case "Renewable Energy":
+                intent.putExtra(EXTRA_TEXT, candidate.energyFull);
+                break;
+            case "Universal Healthcare":
+                intent.putExtra(EXTRA_TEXT, candidate.healthFull);
+                break;
+        }
+
         startActivity(intent);
         overridePendingTransition(0, 0);
     }

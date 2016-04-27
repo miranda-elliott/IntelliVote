@@ -26,6 +26,7 @@ public class IssueDetailActivity extends BaseActivity
     // Intent extras to send to candidate issue activity
     public static final String EXTRA_CANDIDATE_NAME = "candidate_name";
     public static final String EXTRA_ISSUE_NAME = "issue_name";
+    public static final String EXTRA_TEXT = "body_text";
     public static final String EXTRA_ACTIVITY = "parent_activity";
 
     IssueDetailFragmentAdapter mIssueDetailFragmentAdapter;
@@ -94,6 +95,25 @@ public class IssueDetailActivity extends BaseActivity
         intent.putExtra(EXTRA_CANDIDATE_NAME, candidate.name);
         intent.putExtra(EXTRA_ISSUE_NAME, issue.name);
         intent.putExtra(EXTRA_ACTIVITY, R.id.issues);
+
+        switch(issue.name) {
+            case "Abortion":
+                intent.putExtra(EXTRA_TEXT, candidate.abortionFull);
+                break;
+            case "Gun Control":
+                intent.putExtra(EXTRA_TEXT, candidate.gunFull);
+                break;
+            case "Marriage Equality":
+                intent.putExtra(EXTRA_TEXT, candidate.marriageFull);
+                break;
+            case "Renewable Energy":
+                intent.putExtra(EXTRA_TEXT, candidate.energyFull);
+                break;
+            case "Universal Healthcare":
+                intent.putExtra(EXTRA_TEXT, candidate.healthFull);
+                break;
+        }
+
         startActivity(intent);
         overridePendingTransition(0,0);
     }
