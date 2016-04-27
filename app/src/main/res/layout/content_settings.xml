@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,8 +11,43 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".Activities.SettingsActivity">
     <TextView
+        android:id="@+id/text_personalinfo_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
-
-</FrameLayout>
+        android:singleLine="true"
+        android:layout_alignParentTop="true"
+        android:text="Personal Information"
+        android:textAppearance="@android:style/TextAppearance.Holo.SearchResult.Title"/>
+    <TextView
+        android:id="@+id/text_personalinfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_personalinfo_title"/>
+    <TextView
+        android:id="@+id/text_quiz_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:layout_below="@id/text_personalinfo"
+        android:paddingTop="16dp"
+        android:text="Quiz Answers"
+        android:textAppearance="@android:style/TextAppearance.Holo.SearchResult.Title"/>
+    <TextView
+        android:id="@+id/text_quiz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_quiz_title"/>
+    <TextView
+        android:id="@+id/text_notifications_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_quiz"
+        android:paddingTop="16dp"
+        android:text="Notifications"
+        android:textAppearance="@android:style/TextAppearance.Holo.SearchResult.Title"/>
+    <TextView
+        android:id="@+id/text_notifications"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_notifications_title"/>
+</RelativeLayout>

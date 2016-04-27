@@ -1,22 +1,35 @@
 package edu.wm.cs420.intellivote.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
-import edu.wm.cs420.intellivote.Adapters.CandidateFragmentAdapter;
-import edu.wm.cs420.intellivote.Fragments.CandidateFragment;
+import edu.wm.cs420.intellivote.Adapters.CandidateDetailFragmentAdapter;
+import edu.wm.cs420.intellivote.Fragments.CandidateDetailBioFragment;
+import edu.wm.cs420.intellivote.Fragments.CandidateDetailIssuesFragment;
+import edu.wm.cs420.intellivote.Fragments.CandidateDetailNewsFragment;
 import edu.wm.cs420.intellivote.Models.Candidate;
+import edu.wm.cs420.intellivote.Models.Issue;
 import edu.wm.cs420.intellivote.R;
 
 public class CandidateDetailActivity extends BaseActivity
-        implements CandidateFragment.OnCandidateFragmentInteractionListener {
+        implements CandidateDetailBioFragment.OnCandidateDetailBioFragmentInteractionListener,
+        CandidateDetailIssuesFragment.OnCandidateDetailIssuesFragmentInteractionListener,
+        CandidateDetailNewsFragment.OnCandidateDetailNewsFragmentInteractionListener {
 
     public Candidate candidate;
 
-    CandidateFragmentAdapter mCandidateFragmentAdapter;
+    // Intent extras to send to candidate issue activity
+    public static final String EXTRA_CANDIDATE_NAME = "candidate_name";
+    public static final String EXTRA_ISSUE_NAME = "issue_name";
+    public static final String EXTRA_ACTIVITY = "parent_activity";
+
+    CandidateDetailFragmentAdapter mCandidateDetailFragmentAdapter;
     ViewPager mViewPager;
     TabLayout mTabLayout;
 
@@ -25,7 +38,7 @@ public class CandidateDetailActivity extends BaseActivity
         super.onCreate(savedInstanceState);
 
         // get extra
-        candidate = (Candidate) getIntent().getSerializableExtra(CandidatesActivity.EXTRA_CANDIDATE);
+        candidate = (Candidate) getIntent().getSerializableExtra(CandidateListActivity.EXTRA_CANDIDATE);
 
         // set shared variables
         this.currentActivitySelected = R.id.candidates;
@@ -36,9 +49,9 @@ public class CandidateDetailActivity extends BaseActivity
         setContentView(R.layout.content_tab_pager);
 
         // set up fragment viewpager
-        mCandidateFragmentAdapter = CandidateFragmentAdapter.newInstance(getSupportFragmentManager(), candidate);
+        mCandidateDetailFragmentAdapter = CandidateDetailFragmentAdapter.newInstance(getSupportFragmentManager(), candidate);
         mViewPager = (ViewPager) findViewById(R.id.pager);
-        mViewPager.setAdapter(mCandidateFragmentAdapter);
+        mViewPager.setAdapter(mCandidateDetailFragmentAdapter);
 
         // set up tabs
         mTabLayout = (TabLayout) findViewById(R.id.pager_tabs);
@@ -65,17 +78,24 @@ public class CandidateDetailActivity extends BaseActivity
 
         if (id == R.id.action_favorite) {
             // TODO: Save candidate to favorites
-            candidate.isFavorite = true;
-            invalidateOptionsMenu();
+            Toast.makeText(CandidateDetailActivity.this, "Add candidate to favorites", Toast.LENGTH_SHORT).show();
             return true;
         } else if (id == R.id.action_unfavorite) {
             // TODO: Remove candidate from favorites
-            candidate.isFavorite = false;
-            invalidateOptionsMenu();
+            Toast.makeText(CandidateDetailActivity.this, "Remove candidate from favorites", Toast.LENGTH_SHORT).show();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void issueSelected(Issue issue) {
+        Intent intent = new Intent(this, CandidateIssueActivity.class);
+        intent.putExtra(EXTRA_CANDIDATE_NAME, candidate.name);
+        intent.putExtra(EXTRA_ISSUE_NAME, issue.name);
+        intent.putExtra(EXTRA_ACTIVITY, R.id.candidates);
+        startActivity(intent);
+        overridePendingTransition(0, 0);
+    }
 }

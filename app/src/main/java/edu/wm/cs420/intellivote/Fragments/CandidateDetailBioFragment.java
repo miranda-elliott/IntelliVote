@@ -1,49 +1,44 @@
 package edu.wm.cs420.intellivote.Fragments;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.io.IOException;
 
-import edu.wm.cs420.intellivote.Adapters.CandidateFragmentAdapter;
-import edu.wm.cs420.intellivote.Adapters.CandidateListAdapter;
 import edu.wm.cs420.intellivote.Models.Candidate;
 import edu.wm.cs420.intellivote.R;
 
-public class CandidateFragment extends Fragment{
+public class CandidateDetailBioFragment extends Fragment{
 
     // Flags for args
     public static final String ARG_CANDIDATE = "candidate";
-    public static final String ARG_TAB = "tab";
 
     // Args
     private Candidate candidate;
-    private int tab;
 
     // Interaction listener
-    OnCandidateFragmentInteractionListener listener;
+    OnCandidateDetailBioFragmentInteractionListener listener;
 
     // Factory method
-    public static CandidateFragment newInstance(Candidate candidate, int tab) {
+    public static Fragment newInstance(Candidate candidate) {
         Bundle args = new Bundle();
         args.putSerializable(ARG_CANDIDATE, candidate);
-        args.putInt(ARG_TAB, tab);
-        CandidateFragment candidateFragment = new CandidateFragment();
-        candidateFragment.setArguments(args);
+        CandidateDetailBioFragment candidateDetailBioFragment = new CandidateDetailBioFragment();
+        candidateDetailBioFragment.setArguments(args);
 
-        return candidateFragment;
+        return candidateDetailBioFragment;
     }
     // Required no arg constructor
-    public CandidateFragment(){}
+    public CandidateDetailBioFragment(){}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,26 +46,26 @@ public class CandidateFragment extends Fragment{
 
         if (getArguments() != null) {
             candidate = (Candidate) getArguments().getSerializable(ARG_CANDIDATE);
-            tab = (int) getArguments().getInt(ARG_TAB);
         }
     }
 
+    //--UI Widgets--//
+    private ImageView icon;
+    private TextView bio;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: create layouts for each tab
-
         View rootView = inflater.inflate(R.layout.fragment_candidate_bio, container, false);
 
-        switch (tab) {
-            case 0:
-                rootView = inflater.inflate(R.layout.fragment_candidate_bio, container, false);
+        icon = (ImageView) rootView.findViewById(R.id.image_icon);
+        bio = (TextView) rootView.findViewById(R.id.text_bio);
 
-            case 1:
-                rootView = inflater.inflate(R.layout.fragment_candidate_issues, container, false);
-
-            case 2:
-                rootView = inflater.inflate(R.layout.fragment_candidate_news, container, false);
+        try {
+            icon.setImageBitmap(BitmapFactory.decodeStream(getContext().getAssets().open(candidate.icon)));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        bio.setText(candidate.bio);
 
         return rootView;
     }
@@ -79,10 +74,10 @@ public class CandidateFragment extends Fragment{
     public void onAttach(Context context) {
         super.onAttach(context);
         try {
-            listener = (OnCandidateFragmentInteractionListener) context;
+            listener = (OnCandidateDetailBioFragmentInteractionListener) context;
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString()
-                    + " must implement OnCandidateFragmentInteractionListener");
+                    + " must implement OnCandidateDetailBioFragmentInteractionListener");
         }
     }
 
@@ -92,7 +87,7 @@ public class CandidateFragment extends Fragment{
         listener = null;
     }
 
-    public interface OnCandidateFragmentInteractionListener {
+    public interface OnCandidateDetailBioFragmentInteractionListener {
 
     }
 

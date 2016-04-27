@@ -1,27 +1,41 @@
 package edu.wm.cs420.intellivote.Models;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
+
 import java.io.Serializable;
 import java.util.List;
+
+import edu.wm.cs420.intellivote.R;
 
 public class Candidate implements Serializable {
 
     public String name;
-    public int icon;
+    public String icon;
     public String description;
     public String bio;
-    public List<String> issues;
-    public List<String> news;
     public float matchRate;
     public Boolean isFavorite;
 
-    public Candidate(String name, int icon, String description, String bio, List<String> issues, List<String> news, float matchRate, Boolean isFavorite) {
-        this.name = name;
-        this.icon = icon;
-        this.description = description;
-        this.bio = bio;
-        this.issues = issues;
-        this.news = news;
-        this.matchRate = matchRate;
-        this.isFavorite = isFavorite;
-    }
+    public Boolean abortionMatch;
+    public String abortionDescription;
+    public String abortionFull;
+
+    public Boolean gunMatch;
+    public String gunDescription;
+    public String gunFull;
+
+    public Boolean marriageMatch;
+    public String marriageDescription;
+    public String marriageFull;
+
+    public Boolean energyMatch;
+    public String energyDescription;
+    public String energyFull;
+
+    public Boolean healthMatch;
+    public String healthDescription;
+    public String healthFull;
+
+    public Candidate() {}
 }

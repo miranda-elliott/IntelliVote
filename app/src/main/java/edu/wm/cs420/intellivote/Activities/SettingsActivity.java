@@ -3,6 +3,8 @@ package edu.wm.cs420.intellivote.Activities;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import edu.wm.cs420.intellivote.R;
 
@@ -19,6 +21,22 @@ public class SettingsActivity extends BaseActivity {
 
         // inflate layout
         setContentView(R.layout.content_settings);
+
+        // fill content
+        TextView personalInfo = (TextView) findViewById(R.id.text_personalinfo);
+        personalInfo.setText("Address:\n600 Ukrop Way\nWilliamsburg, VA 23185\nEmail:\nabrickhouse@email.wm.edu");
+
+        TextView quizAnswers = (TextView) findViewById(R.id.text_quiz);
+        quizAnswers.setText("What is your stance on abortion?: Pro-choice\n" +
+                "Should there be more restrictions on the current process of purchasing a gun?: Yes\n" +
+                "Do you support the legalization of same-sex marriage?: Yes\n" +
+                "Should the government encourage the use of renewable energy?: Yes\n" +
+                "Do you support universal healthcare?: Yes");
+
+        TextView notifications = (TextView) findViewById(R.id.text_notifications);
+        notifications.setText("Election reminders: Yes\n" +
+                "Registration reminders: Yes\n" +
+                "Favorites news updates: No");
     }
 
     @Override
@@ -37,11 +55,10 @@ public class SettingsActivity extends BaseActivity {
 
         if (id == R.id.action_edit) {
             // TODO: allow to update personal information, change quiz answers, notification preferences, etc.
+            Toast.makeText(SettingsActivity.this, "Update personal information, quiz answers, notifications preferences, etc.", Toast.LENGTH_SHORT).show();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
-
-
 }

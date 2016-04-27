@@ -9,51 +9,41 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.List;
-
 import edu.wm.cs420.intellivote.Activities.BaseActivity;
 import edu.wm.cs420.intellivote.Adapters.IssueListAdapter;
+import edu.wm.cs420.intellivote.Models.Candidate;
 import edu.wm.cs420.intellivote.Models.Issue;
 import edu.wm.cs420.intellivote.R;
 
-public class IssueListFragment extends Fragment {
+public class CandidateDetailIssuesFragment extends Fragment {
+
     // Flags for args
-    public static final String ARG_TYPE = "LIST_TYPE";
+    public static final String ARG_CANDIDATE = "candidate";
 
     // Args
-    private int listType;
+    private Candidate candidate;
 
     // Interaction listener
-    OnIssueListFragmentInteractionListener listener;
-
-    List<Issue> issueList;
+    OnCandidateDetailIssuesFragmentInteractionListener listener;
 
     // Factory method
-    public static Fragment newInstance(int type) {
+    public static Fragment newInstance(Candidate candidate) {
         Bundle args = new Bundle();
-        args.putSerializable(ARG_TYPE, type);
-        IssueListFragment issueListFragment = new IssueListFragment();
-        issueListFragment.setArguments(args);
+        args.putSerializable(ARG_CANDIDATE, candidate);
+        CandidateDetailIssuesFragment candidateDetailIssuesFragment = new CandidateDetailIssuesFragment();
+        candidateDetailIssuesFragment.setArguments(args);
 
-        return issueListFragment;
+        return candidateDetailIssuesFragment;
     }
     // Required no arg constructor
-    public IssueListFragment(){}
+    public CandidateDetailIssuesFragment(){}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-            listType = (int) getArguments().getSerializable(ARG_TYPE);
-        }
-
-        // get list corresponding to tab
-        BaseActivity parentActivity = (BaseActivity) getActivity();
-        if (listType == 1) {
-            issueList = parentActivity.favoriteIssues;
-        } else {
-            issueList = parentActivity.allIssues;
+            candidate = (Candidate) getArguments().getSerializable(ARG_CANDIDATE);
         }
     }
 
@@ -69,7 +59,8 @@ public class IssueListFragment extends Fragment {
         layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
 
-        recyclerView.setAdapter(new IssueListAdapter(null, getContext(), issueList, new IssueListAdapter.OnIssueSelectedListener() {
+        BaseActivity parentActivity = (BaseActivity) getActivity();
+        recyclerView.setAdapter(new IssueListAdapter(candidate, getContext(), parentActivity.allIssues, new IssueListAdapter.OnIssueSelectedListener() {
             @Override
             public void issueSelected(Issue issue) {
                 listener.issueSelected(issue);
@@ -77,17 +68,16 @@ public class IssueListFragment extends Fragment {
         }));
 
         return rootView;
-
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         try {
-            listener = (OnIssueListFragmentInteractionListener) context;
+            listener = (OnCandidateDetailIssuesFragmentInteractionListener) context;
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString()
-                    + " must implement OnCandidateListFragmentInteractionListener");
+                    + " must implement OnCandidateDetailIssuesFragmentInteractionListener");
         }
     }
 
@@ -97,7 +87,7 @@ public class IssueListFragment extends Fragment {
         listener = null;
     }
 
-    public interface OnIssueListFragmentInteractionListener {
+    public interface OnCandidateDetailIssuesFragmentInteractionListener {
         void issueSelected(Issue issue);
     }
 }

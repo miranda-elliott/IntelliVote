@@ -6,38 +6,39 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
-import edu.wm.cs420.intellivote.Adapters.CandidateListFragmentAdapter;
-import edu.wm.cs420.intellivote.Fragments.CandidateListFragment;
-import edu.wm.cs420.intellivote.Models.Candidate;
+import edu.wm.cs420.intellivote.Adapters.IssueListFragmentAdapter;
+import edu.wm.cs420.intellivote.Fragments.IssueListFragment;
+import edu.wm.cs420.intellivote.Models.Issue;
 import edu.wm.cs420.intellivote.R;
 
-public class CandidatesActivity extends BaseActivity
-        implements CandidateListFragment.OnCandidateListFragmentInteractionListener {
+public class IssueListActivity extends BaseActivity
+        implements IssueListFragment.OnIssueListFragmentInteractionListener {
 
-    CandidateListFragmentAdapter mCandidateListFragmentAdapter;
+    IssueListFragmentAdapter mIssueListFragmentAdapter;
     ViewPager mViewPager;
     TabLayout mTabLayout;
 
     // Intent extra to send to detail activity
-    public static final String EXTRA_CANDIDATE = "chosen_candidate";
+    public static final String EXTRA_ISSUE = "chosen_issue";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // set shared variables
-        this.currentActivitySelected = R.id.candidates;
-        this.pageTitle = getResources().getString(R.string.title_activity_candidates);
+        // set shared variable
+        this.currentActivitySelected = R.id.issues;
+        this.pageTitle = getResources().getString(R.string.title_activity_issues);
         this.upNavEnabled = false;
 
-        // inflate layout
+        // inflate view
         setContentView(R.layout.content_tab_pager);
 
         // set up fragment viewpager
-        mCandidateListFragmentAdapter = new CandidateListFragmentAdapter(getSupportFragmentManager());
+        mIssueListFragmentAdapter = new IssueListFragmentAdapter(getSupportFragmentManager());
         mViewPager = (ViewPager) findViewById(R.id.pager);
-        mViewPager.setAdapter(mCandidateListFragmentAdapter);
+        mViewPager.setAdapter(mIssueListFragmentAdapter);
 
         // set up tabs
         mTabLayout = (TabLayout) findViewById(R.id.pager_tabs);
@@ -59,7 +60,8 @@ public class CandidatesActivity extends BaseActivity
         int id = item.getItemId();
 
         if (id == R.id.action_search) {
-            // TODO: Search candidates
+            // TODO: Search issues
+            Toast.makeText(IssueListActivity.this, "Search for issue", Toast.LENGTH_SHORT).show();
             return true;
         }
 
@@ -67,11 +69,10 @@ public class CandidatesActivity extends BaseActivity
     }
 
     @Override
-    public void candidateSelected(Candidate candidate) {
-        Intent intent = new Intent(getApplicationContext(), CandidateDetailActivity.class);
-        intent.putExtra(EXTRA_CANDIDATE, candidate);
+    public void issueSelected(Issue issue) {
+        Intent intent = new Intent(getApplicationContext(), IssueDetailActivity.class);
+        intent.putExtra(EXTRA_ISSUE, issue);
         startActivity(intent);
         overridePendingTransition(0, 0);
     }
 }
-

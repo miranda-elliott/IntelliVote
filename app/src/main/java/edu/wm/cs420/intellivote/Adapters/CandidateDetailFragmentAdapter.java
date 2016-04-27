@@ -4,11 +4,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import edu.wm.cs420.intellivote.Fragments.CandidateFragment;
-import edu.wm.cs420.intellivote.Fragments.CandidateListFragment;
+import edu.wm.cs420.intellivote.Fragments.CandidateDetailBioFragment;
+import edu.wm.cs420.intellivote.Fragments.CandidateDetailIssuesFragment;
+import edu.wm.cs420.intellivote.Fragments.CandidateDetailNewsFragment;
 import edu.wm.cs420.intellivote.Models.Candidate;
 
-public class CandidateFragmentAdapter extends FragmentStatePagerAdapter {
+public class CandidateDetailFragmentAdapter extends FragmentStatePagerAdapter {
     public final int TAB_BIO = 0;
     public final int TAB_ISSUES = 1;
     public final int TAB_NEWS = 2;
@@ -16,25 +17,24 @@ public class CandidateFragmentAdapter extends FragmentStatePagerAdapter {
     static Candidate candidate = null;
 
     // Constructor
-    public CandidateFragmentAdapter(FragmentManager fragmentManager) {
+    public CandidateDetailFragmentAdapter(FragmentManager fragmentManager) {
         super(fragmentManager);
     }
 
-    public static CandidateFragmentAdapter newInstance(FragmentManager fragmentManager, Candidate givenCandidate) {
+    public static CandidateDetailFragmentAdapter newInstance(FragmentManager fragmentManager, Candidate givenCandidate) {
         candidate = givenCandidate;
-        return new CandidateFragmentAdapter(fragmentManager);
+        return new CandidateDetailFragmentAdapter(fragmentManager);
     }
 
     @Override
     public Fragment getItem(int position) {
-
         switch (position) {
             case TAB_BIO:
-                return CandidateFragment.newInstance(candidate, TAB_BIO);
+                return CandidateDetailBioFragment.newInstance(candidate);
             case TAB_ISSUES:
-                return CandidateFragment.newInstance(candidate, TAB_ISSUES);
+                return CandidateDetailIssuesFragment.newInstance(candidate);
             case TAB_NEWS:
-                return CandidateFragment.newInstance(candidate, TAB_NEWS);
+                return CandidateDetailNewsFragment.newInstance(candidate);
             default:
                 return null;
         }

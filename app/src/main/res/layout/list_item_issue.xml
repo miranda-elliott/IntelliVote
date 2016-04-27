@@ -43,13 +43,16 @@
             android:paddingTop="5dp"
             android:layout_below="@id/issue_name"
             android:layout_toEndOf="@id/issue_icon"/>
-        <!-- Issue Importance -->
+        <!-- Issue Match -->
         <TextView
             android:id="@+id/issue_match"
             android:singleLine="true"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/issue_name"
-            android:layout_alignParentBottom="true" />
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignBaseline="@id/candidate_name"
+            android:textAppearance="@android:style/TextAppearance.Holo.SearchResult.Subtitle"
+            android:padding="20dp"/>
     </RelativeLayout>
 </android.support.v7.widget.CardView>

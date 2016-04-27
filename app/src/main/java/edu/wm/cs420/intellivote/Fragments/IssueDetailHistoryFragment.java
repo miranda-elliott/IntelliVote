@@ -1,40 +1,42 @@
 package edu.wm.cs420.intellivote.Fragments;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import java.io.IOException;
+
 import edu.wm.cs420.intellivote.Models.Issue;
 import edu.wm.cs420.intellivote.R;
 
-public class IssueFragment extends Fragment {
+public class IssueDetailHistoryFragment extends Fragment {
 
     // Flags for args
     public static final String ARG_ISSUE = "issue";
-    public static final String ARG_TAB = "tab";
 
     // Args
     private Issue issue;
-    private int tab;
 
     // Interaction listener
-    OnIssueFragmentInteractionListener listener;
+    OnIssueDetailHistoryFragmentInteractionListener listener;
 
     // Factory method
-    public static IssueFragment newInstance(Issue issue, int tab) {
+    public static Fragment newInstance(Issue issue) {
         Bundle args = new Bundle();
         args.putSerializable(ARG_ISSUE, issue);
-        args.putInt(ARG_TAB, tab);
-        IssueFragment issueFragment = new IssueFragment();
-        issueFragment.setArguments(args);
+        IssueDetailHistoryFragment issueDetailHistoryFragment = new IssueDetailHistoryFragment();
+        issueDetailHistoryFragment.setArguments(args);
 
-        return issueFragment;
+        return issueDetailHistoryFragment;
     }
     // Required no arg constructor
-    public IssueFragment(){}
+    public IssueDetailHistoryFragment(){}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,26 +44,26 @@ public class IssueFragment extends Fragment {
 
         if (getArguments() != null) {
             issue = (Issue) getArguments().getSerializable(ARG_ISSUE);
-            tab = (int) getArguments().getInt(ARG_TAB);
         }
     }
 
+    //--UI Widgets--//
+    private ImageView icon;
+    private TextView history;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: create layouts for each tab
-
         View rootView = inflater.inflate(R.layout.fragment_issue_history, container, false);
 
-        switch (tab) {
-            case 0:
-                rootView = inflater.inflate(R.layout.fragment_issue_history, container, false);
+        icon = (ImageView) rootView.findViewById(R.id.image_icon);
+        history = (TextView) rootView.findViewById(R.id.text_history);
 
-            case 1:
-                rootView = inflater.inflate(R.layout.fragment_issue_candidates, container, false);
-
-            case 2:
-                rootView = inflater.inflate(R.layout.fragment_issue_news, container, false);
+        try {
+            icon.setImageBitmap(BitmapFactory.decodeStream(getContext().getAssets().open(issue.icon)));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        history.setText(issue.history);
 
         return rootView;
     }
@@ -70,10 +72,10 @@ public class IssueFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         try {
-            listener = (OnIssueFragmentInteractionListener) context;
+            listener = (OnIssueDetailHistoryFragmentInteractionListener) context;
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString()
-                    + " must implement OnIssueFragmentInteractionListener");
+                    + " must implement OnIssueDetailHistoryFragmentInteractionListener");
         }
     }
 
@@ -83,7 +85,7 @@ public class IssueFragment extends Fragment {
         listener = null;
     }
 
-    public interface OnIssueFragmentInteractionListener {
+    public interface OnIssueDetailHistoryFragmentInteractionListener {
 
     }
 }

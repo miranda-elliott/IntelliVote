@@ -8,4 +8,6 @@
     <color name="colorTextSecondary">#727272</color>
     <color name="colorDivider">#B6B6B6</color>
     <color name="colorIcon">#FFFFFF</color>
+    <color name="colorAgree">#8dc153</color>
+    <color name="colorDisagree">#FFFF5252</color>
 </resources>

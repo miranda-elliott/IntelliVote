@@ -9,10 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
+import edu.wm.cs420.intellivote.Activities.BaseActivity;
 import edu.wm.cs420.intellivote.Adapters.CandidateListAdapter;
 import edu.wm.cs420.intellivote.Models.Candidate;
 import edu.wm.cs420.intellivote.R;
@@ -29,27 +28,8 @@ public class CandidateListFragment extends Fragment {
 
     List<Candidate> candidateList;
 
-    // Populate sample data lists of candidates
-    private List<Candidate> getNationalCandidates() {
-        List<Candidate> nationalCandidates = new ArrayList<>();
-        List<String> sampleIssues = Arrays.asList("Sample Issue 1", "Sample Issue 2", "Sample Issue 3");
-        List<String> sampleNews = Arrays.asList("Sample News 1", "Sample News 2", "Sample News 3");
-        Candidate candidate1 = new Candidate("Hillary Clinton", R.drawable.img_candidate1, "Sample description", "Sample history", sampleIssues, sampleNews, 86, false);
-        nationalCandidates.add(candidate1);
-        return nationalCandidates;
-    }
-
-    private List<Candidate> getFavoriteCandidates() {
-        List<Candidate> favoriteCandidates = new ArrayList<>();
-        List<String> sampleIssues = Arrays.asList("Sample Issue 1", "Sample Issue 2", "Sample Issue 3");
-        List<String> sampleNews = Arrays.asList("Sample News 1", "Sample News 2", "Sample News 3");
-        Candidate candidate1 = new Candidate("Hillary Clinton", R.drawable.img_candidate1, "Sample description", "Sample history", sampleIssues, sampleNews, 86, true);
-        favoriteCandidates.add(candidate1);
-        return favoriteCandidates;
-    }
-
     // Factory method
-    public static CandidateListFragment newInstance(int type) {
+    public static Fragment newInstance(int type) {
         Bundle args = new Bundle();
         args.putSerializable(ARG_TYPE, type);
         CandidateListFragment candidateListFragment = new CandidateListFragment();
@@ -68,11 +48,12 @@ public class CandidateListFragment extends Fragment {
             listType = (int) getArguments().getSerializable(ARG_TYPE);
         }
 
-        // get list corresponding to tab
+        // get candidates list corresponding to tab
+        BaseActivity parentActivity = (BaseActivity) getActivity();
         if (listType == 1) {
-            candidateList = getFavoriteCandidates();
+            candidateList = parentActivity.favoriteCandidates;
         } else {
-            candidateList = getNationalCandidates();
+            candidateList = parentActivity.nationalCandidates;
         }
     }
 
@@ -88,7 +69,7 @@ public class CandidateListFragment extends Fragment {
         layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
 
-        recyclerView.setAdapter(new CandidateListAdapter(candidateList, new CandidateListAdapter.OnCandidateSelectedListener() {
+        recyclerView.setAdapter(new CandidateListAdapter(null, getContext(), candidateList, new CandidateListAdapter.OnCandidateSelectedListener() {
             @Override
             public void candidateSelected(Candidate candidate) {
                 listener.candidateSelected(candidate);

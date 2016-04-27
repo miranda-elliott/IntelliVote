@@ -1,6 +1,7 @@
 package edu.wm.cs420.intellivote.Adapters;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.util.List;
 
 import edu.wm.cs420.intellivote.Models.Candidate;
@@ -23,6 +25,8 @@ public class IssueListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     public List<Issue> issueList;
     private final OnIssueSelectedListener listener;
+    private Context context;
+    private Candidate candidate;
 
     // View Holder
     private class IssueViewHolder extends RecyclerView.ViewHolder {
@@ -44,9 +48,11 @@ public class IssueListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     // Constructor
-    public IssueListAdapter(List<Issue> issueList, OnIssueSelectedListener listener) {
+    public IssueListAdapter(Candidate candidate, Context context, List<Issue> issueList, OnIssueSelectedListener listener) {
         this.issueList = issueList;
         this.listener = listener;
+        this.context = context;
+        this.candidate = candidate;
     }
 
     @Override
@@ -61,10 +67,70 @@ public class IssueListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         final Issue issue = issueList.get(position);
 
         IssueViewHolder issueViewHolder = IssueViewHolder.class.cast(viewHolder);
-        issueViewHolder.icon.setImageResource(issue.icon);
+        try {
+            issueViewHolder.icon.setImageBitmap(BitmapFactory.decodeStream(context.getAssets().open(issue.icon)));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         issueViewHolder.name.setText(issue.name);
-        issueViewHolder.description.setText(issue.description);
-        issueViewHolder.match.setText(String.format("%.0f%%", issue.matchRate));
+
+        if (candidate != null) {
+            switch (issue.name) {
+                case "Abortion":
+                    issueViewHolder.description.setText(candidate.abortionDescription);
+                    if (candidate.abortionMatch) {
+                        issueViewHolder.match.setText("Agree");
+                        issueViewHolder.match.setTextColor(context.getResources().getColor(R.color.colorAgree));
+                    } else {
+                        issueViewHolder.match.setText("Disagree");
+                        issueViewHolder.match.setTextColor(context.getResources().getColor(R.color.colorDisagree));
+                    }
+                    break;
+                case "Gun Control":
+                    issueViewHolder.description.setText(candidate.gunDescription);
+                    if (candidate.gunMatch) {
+                        issueViewHolder.match.setText("Agree");
+                        issueViewHolder.match.setTextColor(context.getResources().getColor(R.color.colorAgree));
+                    } else {
+                        issueViewHolder.match.setText("Disagree");
+                        issueViewHolder.match.setTextColor(context.getResources().getColor(R.color.colorDisagree));
+                    }
+                    break;
+                case "Marriage Equality":
+                    issueViewHolder.description.setText(candidate.marriageDescription);
+                    if (candidate.marriageMatch) {
+                        issueViewHolder.match.setText("Agree");
+                        issueViewHolder.match.setTextColor(context.getResources().getColor(R.color.colorAgree));
+                    } else {
+                        issueViewHolder.match.setText("Disagree");
+                        issueViewHolder.match.setTextColor(context.getResources().getColor(R.color.colorDisagree));
+                    }
+                    break;
+                case "Renewable Energy":
+                    issueViewHolder.description.setText(candidate.energyDescription);
+                    if (candidate.energyMatch) {
+                        issueViewHolder.match.setText("Agree");
+                        issueViewHolder.match.setTextColor(context.getResources().getColor(R.color.colorAgree));
+                    } else {
+                        issueViewHolder.match.setText("Disagree");
+                        issueViewHolder.match.setTextColor(context.getResources().getColor(R.color.colorDisagree));
+                    }
+                    break;
+                case "Universal Healthcare":
+                    issueViewHolder.description.setText(candidate.healthDescription);
+                    if (candidate.healthMatch) {
+                        issueViewHolder.match.setText("Agree");
+                        issueViewHolder.match.setTextColor(context.getResources().getColor(R.color.colorAgree));
+                    } else {
+                        issueViewHolder.match.setText("Disagree");
+                        issueViewHolder.match.setTextColor(context.getResources().getColor(R.color.colorDisagree));
+                    }
+                    break;
+            }
+        } else {
+            issueViewHolder.description.setText(issue.description);
+            issueViewHolder.match.setVisibility(View.INVISIBLE);
+        }
 
         issueViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
