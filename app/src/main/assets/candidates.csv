@@ -1,6 +1,6 @@
 Name,IconFile,Description,Biography,MatchRate,isFavorite,Abortion_bool,Abortion_desc,Abortion_full,GunControl_bool,GunControl_desc,GunControl_full,MarriageEquality_bool,MarriageEquality_desc,MarriageEquality_full,RenewableEnergy_bool,RenewableEnergy_desc,RenewableEnergy_full,UniversalHealthcare_bool,UniversalHealthcare_descl,UniversalHealthcare_full
-Bernie Sanders,img_bs.jpg,Sample,Sample,90,TRUE,TRUE,Sample,Sample,TRUE,Sample,Sample,TRUE,Sample,Sample,TRUE,Sample,Sample,TRUE,Sample,Sample
-Hillary Clinton,img_hc.jpg,Sample,Sample,80,TRUE,TRUE,Sample,Sample,TRUE,Sample,Sample,TRUE,Sample,Sample,TRUE,Sample,Sample,TRUE,Sample,Sample
-John Kasich,img_jk.jpg,Sample,Sample,40,FALSE,FALSE,Sample,Sample,FALSE,Sample,Sample,FALSE,Sample,Sample,FALSE,Sample,Sample,FALSE,Sample,Sample
-Donald Trump,img_dt.jpg,Sample,Sample,20,FALSE,FALSE,Sample,Sample,FALSE,Sample,Sample,TRUE,Sample,Sample,TRUE,Sample,Sample,FALSE,Sample,Sample
-Ted Cruz ,img_tc.jpg,Sample,Sample,10,FALSE,FALSE,Sample,Sample,FALSE,Sample,Sample,FALSE,Sample,Sample,FALSE,Sample,Sample,FALSE,Sample,Sample
+Bernie Sanders,img_bs.jpg,Sample,Sample,100,TRUE,TRUE,Sample,Sample,TRUE,Sample,Sample,TRUE,Sample,Sample,TRUE,Sample,Sample,TRUE,Sample,Sample
+Hillary Clinton,img_hc.jpg,Sample,Sample,100,TRUE,TRUE,Sample,Sample,TRUE,Sample,Sample,TRUE,Sample,Sample,TRUE,Sample,Sample,TRUE,Sample,Sample
+John Kasich,img_jk.jpg,Sample,Sample,0,FALSE,FALSE,Sample,Sample,FALSE,Sample,Sample,FALSE,Sample,Sample,FALSE,Sample,Sample,FALSE,Sample,Sample
+Donald Trump,img_dt.jpg,Sample,Sample,0,FALSE,FALSE,Sample,Sample,FALSE,Sample,Sample,FALSE,Sample,Sample,FALSE,Sample,Sample,FALSE,Sample,Sample
+Ted Cruz ,img_tc.jpg,Sample,Sample,0,FALSE,FALSE,Sample,Sample,FALSE,Sample,Sample,FALSE,Sample,Sample,FALSE,Sample,Sample,FALSE,Sample,Sample
